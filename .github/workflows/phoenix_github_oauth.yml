@@ -2,8 +2,8 @@ name: Phoenix GitHub OAuth
 
 on:
   push:
-    branches:
-      - "main"
+    # branches:
+    #   - "main"
 
   pull_request:
     branches:
@@ -40,12 +40,9 @@ jobs:
           otp-version: 24
           elixir-version: 1.13
 
-      - uses: edgedb/setup-edgedb@v1
-
-      - name: Setup EdgeDB project
-        run: |
-          edgedb project init --non-interactive --server-start-conf=manual --server-instance=github_oauth
-          edgedb instance start github_oauth
+      - uses: nsidnev/setup-edgedb@project-dir
+        with:
+          project-dir: ./phoenix-github_oauth
 
       - name: Set up cache
         uses: actions/cache@v3
